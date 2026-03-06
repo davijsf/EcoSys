@@ -103,5 +103,4 @@ dotnet run --project src/EcoSys.Console
 
 ## Autor
 
-Davi
-Bacharelado em Ciência da Computação
+Davi José da Silva Ferreira
