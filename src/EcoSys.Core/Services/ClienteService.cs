@@ -1,15 +1,11 @@
-namespace EcoSys.Core.Entities;
+namespace EcoSys.Core.Services;
+using EcoSys.Core.Entities;
 
 public class ClienteService
 {
-public Cliente CadastrarCliente(
-    Empresa empresa,
-    string nome, 
-    string email, 
-    string senha,
-    string login)
+public Cliente CadastrarCliente(Empresa empresa, string nome, string email, string senha, string login)
     {
-
+    // Verifica se já existe login
     bool loginExiste = empresa.Clientes.Any(c => c.Login == login);
 
     if(loginExiste)
@@ -45,7 +41,7 @@ public Cliente CadastrarCliente(
     }
 
     // Listar compras do cliente
-    public List<Compras> ListarCompras(Cliente cliente)
+    public List<Compra> ListarCompras(Cliente cliente)
     {
         return cliente.HistoricoCompras;
     }
