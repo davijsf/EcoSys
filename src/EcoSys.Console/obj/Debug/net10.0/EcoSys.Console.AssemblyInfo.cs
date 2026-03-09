@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EcoSys.Console")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c5af31ebc8773a9c61bb81a4f23809892b6b7d8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+207c6097f74d207bc63983e02a666c04d4e3aa8f")]
 [assembly: System.Reflection.AssemblyProductAttribute("EcoSys.Console")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EcoSys.Console")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,4 +1,4 @@
-namespace EcoSys.Core.Enum;
+namespace EcoSys.Core.Enums;
 
 public enum RegimeContratual
 {
