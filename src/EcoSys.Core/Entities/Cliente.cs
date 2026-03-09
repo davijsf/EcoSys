@@ -10,5 +10,5 @@ public class Cliente
     public string? Login {get ; set ;}
     
     // Lista de compras do Cliente
-    public List<Compras> HistoricoCompras {get ; set ;} = new List<Compras>();
+    public List<Compra> HistoricoCompras {get ; set ;} = new List<Compra>();
 }

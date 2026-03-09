@@ -2,14 +2,12 @@ namespace EcoSys.Core.Entities;
 
 using EcoSys.Core.Enums;
 
-public class Compras
+public class Compra
 {
     // Cliente pode ser nulo. Representando compra sem cadastro na loja fisica
-    public Cliente ? cliente {get; set ;}
+    public Cliente ? Cliente {get; set ;}
 
-    public double valor_total {get ; set ;}
-
-    public Loja loja {get ; set ;}
+    public Loja Loja {get ; set ;}
 
     // Ecommerce ou Loja física
     public CanalVenda canalVenda {get ; set;}
