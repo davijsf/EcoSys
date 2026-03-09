@@ -1,5 +1,5 @@
-using EcoSys.Core.Enum;
 namespace  EcoSys.Core.Entities;
+using EcoSys.Core.Enums;
 
 public class Produto
 {
