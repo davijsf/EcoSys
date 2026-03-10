@@ -9,7 +9,7 @@ public class Funcionario
     // Utilizando Enum: CAIXA, REPOSITOR E GERENTE
     public Cargo Cargo {get ; set ;}
     
-    public Double Salario {get ; set ;}
+    public double Salario {get ; set ;}
     
     public string HorarioEntrada {get ; set ;}
     public string HorarioSaida {get ; set ;}

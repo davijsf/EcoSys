@@ -5,6 +5,6 @@ public class Empresa {
     public List<Loja> Lojas {get ; set ;} = new List<Loja>();
 
     // Lista de clientes
-    public List<Cliente> Clientes {get ; set;} = new List<Cliente>();
+    public List<Cliente> Clientes {get ; set;} = new List<Cliente>();   
 
 }

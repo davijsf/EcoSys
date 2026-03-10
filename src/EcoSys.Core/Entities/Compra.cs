@@ -13,7 +13,7 @@ public class Compra
     public CanalVenda canalVenda {get ; set;}
     
     // Lista de produtos
-    public List<Produto> Produtos {get ; set ;} = new List<Produto>();
+    public List<ItemCompra> Itens {get ; set ;} = new List<ItemCompra>();
 
     // lançar data na hora da compra
     public DateTime dataCompra {get ; set ;}

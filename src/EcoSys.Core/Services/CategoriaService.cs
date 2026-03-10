@@ -46,4 +46,17 @@ public class CategoriaService
         }
         return null;
     }
+
+    public bool RemoverCategoria(string nome)
+    {
+        var categoria = BuscarCategoriaPorNome(nome);
+
+        if (categoria != null)
+        {
+            categorias.Remove(categoria);
+            return true;
+        }
+
+        return false;
+    }
 }

@@ -38,11 +38,24 @@ public class TagService
     {
         foreach (var tag in tags)
         {
-            if (tag.Nome.ToLower() == nome.ToLower())
+            if (tag.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase))
             {
                 return tag;
             }
         }
         return null;
     }   
+
+    public bool RemoverTag(string nome)
+    {
+        var tag = BuscarTagsPorNome(nome);
+
+        if (tag != null)
+        {
+            tags.Remove(tag);
+            return true;
+        }
+
+        return false;
+    }
 }

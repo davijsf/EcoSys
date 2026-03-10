@@ -5,13 +5,15 @@ using EcoSys.Core.Entities;
 
 public class CompraService
 {
-    public Compra RegistrarCompra( Cliente ? cliente, Loja loja, List<Produto> produtos, CanalVenda canalVenda)
+    List<ItemCompra> itens = new List<ItemCompra>();
+
+    public Compra RegistrarCompra( Cliente ? cliente, Loja loja, CanalVenda canalVenda)
     {
         Compra compra = new Compra
         {
             Cliente = cliente,
             Loja = loja,
-            Produtos = produtos,
+            Itens = itens,
             canalVenda = canalVenda
         };
         // Verifica se o cliente não é nullo | caso seja loja física
@@ -32,9 +34,10 @@ public class CompraService
     {   
         double total = 0;
 
-        foreach (var produto in compra.Produtos)
+        foreach (var item in compra.Itens)
         {
-            total += produto.Preco;
+            // Soma de todos os itens
+            total += item.SubTotal;
         }
 
         return total;

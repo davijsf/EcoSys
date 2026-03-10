@@ -1,6 +1,6 @@
 namespace EcoSys.Core.Enums;
 
-public enum TipoVenda
+public enum UnidadeMedida
 {
     UNIDADE,
     QUILO
