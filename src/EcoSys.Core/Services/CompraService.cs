@@ -5,18 +5,17 @@ using EcoSys.Core.Entities;
 
 public class CompraService
 {
-    List<ItemCompra> itens = new List<ItemCompra>();
-
-    public Compra RegistrarCompra( Cliente ? cliente, Loja loja, CanalVenda canalVenda)
+    public Compra RegistrarCompra( Cliente ? cliente, Loja ? loja, List<ItemCompra> itens, CanalVenda canalVenda)
     {
         Compra compra = new Compra
         {
             Cliente = cliente,
             Loja = loja,
             Itens = itens,
-            canalVenda = canalVenda
+            canalVenda = canalVenda,
+            dataCompra = DateTime.Today
         };
-        // Verifica se o cliente não é nullo | caso seja loja física
+        // Verifica se o cliente não é null | caso seja loja física
         if (cliente != null)
         {
             cliente.HistoricoCompras.Add(compra);

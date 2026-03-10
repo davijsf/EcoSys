@@ -1,4 +1,3 @@
-using EcoSys.Core.Entities;
 using EcoSys.Core.Services;
 
 namespace EcoSys.ConsoleApp.Menus;
@@ -6,6 +5,7 @@ namespace EcoSys.ConsoleApp.Menus;
 public class ClienteMenu
 {
     private ClienteService clienteService;
+    private ProdutoService produtoService;
 
     public ClienteMenu(ClienteService clienteService)
     {
@@ -13,7 +13,5 @@ public class ClienteMenu
     }
 
     public void MenuClientes()
-    {
-        
-    }
+    {}
 }

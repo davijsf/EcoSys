@@ -47,11 +47,6 @@ public class ClienteService
         }
         return null;
     }
-    // Autenticação de cliente
-    public Cliente? Autenticar(string login, string senha)
-    {
-        return clientes.FirstOrDefault(c => c.Login == login && c.Senha == senha);
-    }
 
     // Listar compras do cliente
     public List<Compra> ListarCompras(Cliente cliente)

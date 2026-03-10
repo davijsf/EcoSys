@@ -1,6 +1,7 @@
 using EcoSys.Core.Entities;
 using EcoSys.Core.Services;
 using EcoSys.Core.Enums;
+using System.Security.Authentication;
 
 namespace EcoSys.ConsoleApp.Menus;
 
@@ -29,8 +30,8 @@ public class CompraMenu
 
         while (rodando) {
             Console.WriteLine("\n==== MENU COMPRAS ====");
-            Console.WriteLine("1 - Registrar compra");
-            Console.WriteLine("2 - Ver histórico de compras do cliente");
+            Console.WriteLine("1 - Realizar compra");
+            Console.WriteLine("2 - Ver histórico de compras");
             Console.WriteLine("0 - Voltar");
 
             string opcao = Console.ReadLine()!;
@@ -53,7 +54,7 @@ public class CompraMenu
 
     private void RegistrarCompra()
     {
-        Console.WriteLine("Login do Cliente [ou ENTER, se loja física]: ");
+        Console.WriteLine("Login: ");
         string loginCliente = Console.ReadLine()!;
 
         Cliente ? cliente = null;
@@ -111,24 +112,38 @@ public class CompraMenu
         Console.WriteLine("1 - Loja física.");
         Console.WriteLine("2 - Ecommerce.");
 
+        Console.Write("Digite: ");
         string canal = Console.ReadLine()!;
 
         CanalVenda canalVenda = canal == "2" ? CanalVenda.ECOMMERCE : CanalVenda.LOJA_FISICA;
 
+        // inicio a loja com valor indefinido, caso seja ecommerce
         Loja loja = new Loja
         {
-            Cidade = "Aracati"
+            Cidade = ""
         };
 
-        var compra = compraService.RegistrarCompra(cliente, loja, canalVenda);
+        if (canalVenda == CanalVenda.LOJA_FISICA)
+        {
+            Console.WriteLine("1 - Aracati");
+            Console.WriteLine("2 - Russas");
 
+            Console.Write("Digite: ");
+            string city = Console.ReadLine()!;
+
+            // Caso seja loja física, defino a cidade da loja aqui
+            loja.Cidade = city;
+        }
+
+        var compra = compraService.RegistrarCompra(cliente, loja, itens, canalVenda);
+    
         double total = compraService.CalcularTotal(compra);
         Console.WriteLine($"Compra resgitrada! Total: R$ {total}");
     }
 
     private void ListarCompras()
     {
-        Console.Write("Login do cliente: ");
+        Console.Write("Login: ");
         string loginCliente = Console.ReadLine()!;
 
         var cliente = clienteService.BuscarClientePorLogin(loginCliente);
