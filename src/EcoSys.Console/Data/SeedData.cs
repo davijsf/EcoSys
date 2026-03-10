@@ -19,11 +19,6 @@ public static class SeedData
             Nome = "EcoSys"
         };
 
-        // =========================
-        // PRODUTOS
-        // =========================
-       // Na seção PRODUTOS do SeedData.Inicializar(), substitua por:
-
 // =========================
 // PRODUTOS - LOJA DE CASTANHAS E GRÃOS
 // =========================
