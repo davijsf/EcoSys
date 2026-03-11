@@ -26,19 +26,20 @@ O projeto foi estruturado em **duas camadas principais**:
 
 ## 📁 Estrutura do Projeto
 
+```
 EcoSys
-│
-├─ src
-│ ├─ EcoSys.Console
-│ │ ├── Application.cs
-│ │ ├── Data
-│ │ │ └── SeedData.cs
-│ │ └── Menus
-│ │
-│ └─ EcoSys.Core
-│ ├── Entities
-│ ├── Enums
-│ └── Services
+├── src
+│   ├── EcoSys.Console
+│   │   ├── Application.cs
+│   │   ├── Data
+│   │   │   └── SeedData.cs
+│   │   └── Menus
+│   └── EcoSys.Core
+│       ├── Entities
+│       ├── Enums
+│       └── Services
+```
+
 
 text
 
