@@ -4,8 +4,7 @@ O EcoSys é um sistema de gerenciamento desenvolvido em C# (.NET) para auxiliar 
 
 O sistema informatiza processos básicos de uma rede de lojas físicas, permitindo o gerenciamento de produtos, clientes, funcionários e compras através de uma interface interativa via terminal.
 
-Este projeto foi desenvolvido como atividade acadêmica da disciplina Laboratório de Programação 2 (LP2), com foco na aplicação de conceitos de Programação Orientada a Objetos, arquitetura em camadas e boas práticas de desenvolvimento em C#.
-
+Este projeto foi desenvolvido como atividade acadêmica da disciplina Laboratório de Programação 2 (LP2), com foco na aplicação de Programação Orientada a Objetos, arquitetura em camadas e boas práticas de desenvolvimento em C#.
 
 🎯 Objetivos do Sistema
 
@@ -51,7 +50,7 @@ fluxo de execução do sistema
 
 inicialização de dados
 
-Estrutura do Projeto
+📁 Estrutura do Projeto
 EcoSys
 │
 ├─ src
@@ -65,8 +64,6 @@ EcoSys
 │       ├── Entities
 │       ├── Enums
 │       └── Services
-
-
 🛠️ Tecnologias Utilizadas
 
 C#
