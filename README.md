@@ -64,7 +64,3 @@ text
 *2026*
 
 ---
-
-<div align="center">
-  <img src="https://img.shields.io/badge/Made%20with%20%E2%9D%A4%EF%B8%8F-in%20Brazil-green?style=for-the-badge&logo=css3&logoColor=white" alt="Made in Brazil"/>
-</div>
