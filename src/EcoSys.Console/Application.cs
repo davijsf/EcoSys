@@ -10,29 +10,37 @@ public class Application
 {
     public static void Main(string[] args)
     {
-        // Services
+        // 1. Empresa vazia
+        Empresa empresa = new Empresa { Nome = "EcoSys" };
+
+        // 2. Services VAZIOS (sem empresa)
         ProdutoService produtoService = new ProdutoService();
+        ClienteService clienteService = new ClienteService();
+        UsuarioService usuarioService = new UsuarioService();
         CategoriaService categoriaService = new CategoriaService();
         TagService tagService = new TagService();
-        ClienteService clienteService = new ClienteService();
         CompraService compraService = new CompraService();
-        UsuarioService usuarioService = new UsuarioService();
 
-        // Criação dos objetos | manual
-        Empresa empresa = SeedData.Inicializar(
-        produtoService,
-        clienteService,
-        usuarioService
-        );
+        // 3. POPULA empresa
+        empresa = SeedData.Inicializar(produtoService, clienteService, usuarioService);
 
-        // Menus funcionário
+        // 4. SOBRESCREVE TODOS com empresa POPULADA
+        produtoService = new ProdutoService(empresa);
+        clienteService = new ClienteService(empresa);
+        categoriaService = new CategoriaService(empresa);
+        tagService = new TagService(empresa);
+        // compraService e usuarioService não precisam de empresa
+
+        // 5. Menus
         ProdutoMenu produtoMenu = new ProdutoMenu(produtoService);
         CategoriaMenu categoriaMenu = new CategoriaMenu(categoriaService);
         TagMenu tagMenu = new TagMenu(tagService);
         CompraMenu compraMenu = new CompraMenu(compraService, produtoService, clienteService);
 
+
         bool rodando = true;
 
+        // sistema de login
         while (rodando)
         {
             Console.Clear();
@@ -55,7 +63,7 @@ public class Application
                 {
                     Console.WriteLine("Programa encerrado.");
                     rodando = false;
-                    return; // Sai do Main
+                    return; // Sai do programa
                 }
                 continue; // Tenta login novamente
             }
@@ -252,6 +260,9 @@ public class Application
         Console.WriteLine("==== LOJA FÍSICA ====");
         Console.WriteLine($"Usuário: {usuario.Login}");
         Console.WriteLine($"Cargo: {usuario.Cargo}");
+
+        Console.WriteLine($"DEBUG: Cargo = {usuario.Cargo} | Cargo.HasValue = {usuario.Cargo.HasValue}");
+
         Console.WriteLine();
 
         Console.WriteLine("1 - Produtos");
