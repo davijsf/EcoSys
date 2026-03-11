@@ -1,94 +1,90 @@
-EcoSys
-Sistema de gerenciamento para uma empresa de varejo de produtos naturais (EcoSys), desenvolvido como projeto acadêmico para a disciplina de LP2 - Laboratório de Programação 2.
+🌿 EcoSys
 
-O sistema informatiza o fluxo de trabalho de uma rede de lojas físicas em Aracati e Russas-CE, comercializando produtos como castanha de caju, amendoim torrado, linhaça dourada, mel de caju e outros itens naturais.
+O EcoSys é um sistema de gerenciamento desenvolvido em C# (.NET) para auxiliar no controle de uma empresa de varejo de produtos naturais.
 
-Funcionalidades Implementadas
-text
-👤 AUTENTICAÇÃO
-├── Funcionários: carlos/111, davi12/222, joseh/1010 (Aracati)
-└── Clientes: dv/0, js/1
+O sistema informatiza processos básicos de uma rede de lojas físicas, permitindo o gerenciamento de produtos, clientes, funcionários e compras através de uma interface interativa via terminal.
 
-🛒 MENU FUNCIONÁRIO
-├── 1️⃣  Produtos (CRUD + Busca)
-├── 2️⃣  Clientes (CRUD)
-├── 3️⃣  Tags (CRUD)
-├── 4️⃣  Compras (Realizar + Histórico)
-└── 5️⃣  Sair
+Este projeto foi desenvolvido como atividade acadêmica da disciplina Laboratório de Programação 2 (LP2), com foco na aplicação de conceitos de Programação Orientada a Objetos, arquitetura em camadas e boas práticas de desenvolvimento em C#.
 
-🔍 BUSCA INTELIGENTE
-├── "dv" → Cliente Davi
-├── "castanha" → Castanha de caju (+unidade)
-└── "castanhas" → Todos os produtos
-📁 Estrutura do Projeto
-text
+
+🎯 Objetivos do Sistema
+
+O sistema busca resolver tarefas comuns de uma empresa de varejo, como:
+
+gerenciamento de produtos
+
+cadastro e controle de clientes
+
+autenticação de usuários
+
+registro de compras
+
+organização de produtos por categorias e tags
+
+navegação por menus no terminal
+
+🧱 Arquitetura do Projeto
+
+O projeto foi estruturado em duas camadas principais.
+
+EcoSys.Core
+
+Responsável pela regra de negócio e domínio da aplicação.
+
+Contém:
+
+entidades do sistema
+
+enumerações
+
+serviços responsáveis pelas operações
+
+EcoSys.Console
+
+Responsável pela interface com o usuário.
+
+Contém:
+
+menus interativos
+
+fluxo de execução do sistema
+
+inicialização de dados
+
+Estrutura do Projeto
 EcoSys
 │
 ├─ src
 │   ├─ EcoSys.Console
-│   │   ├── Application.cs (Main)
-│   │   ├── Data/SeedData.cs (6 produtos + 9 usuários)
-│   │   └── Menus/ (ProdutoMenu, CompraMenu...)
+│   │   ├── Application.cs
+│   │   ├── Data
+│   │   │    └── SeedData.cs
+│   │   └── Menus
 │   │
 │   └─ EcoSys.Core
-│       ├── Entities/ (Empresa, Produto, Cliente...)
-│       ├── Enums/ (Cargo, UnidadeMedida...)
-│       └── Services/ (ProdutoService, ClienteService...)
-EcoSys.Core - Camada de Domínio
-text
-📦 Entidades: Empresa, Loja, Funcionario, Cliente, Produto, Categoria, Tag, Compra
-⚙️  Services: ProdutoService, ClienteService, UsuarioService, CompraService
-🎯 Enums: Cargo, RegimeContratual, UnidadeMedida, TipoUsuario
-EcoSys.Console - Interface de Usuário
-text
-🎮 Menus interativos via terminal
-🔄 Validação de entrada
-✅ SeedData com dados realistas
-🏪 Dados Iniciais Carregados
-Categoria	Produtos	Preço/kg	Tags
-Castanhas	Castanha de caju	R$45,90	Natural, Vegano
-Grãos	Amendoim torrado	R$22,50	Torrado, Rico em proteína
-Sementes	Linhaça dourada	R$18,90	Rica em ômega 3
-Mel & Doces	Mel de caju	R$38,00	Artesanal
-👥 Usuários: 7 funcionários + 2 clientes
-🏬 Lojas: Aracati, Russas
+│       ├── Entities
+│       ├── Enums
+│       └── Services
 
-🚀 Como Executar
-bash
-# 1. Clonar repositório
-git clone https://github.com/davijsf/EcoSys.git
-cd EcoSys
 
-# 2. Executar sistema
-dotnet run --project src/EcoSys.Console
+🛠️ Tecnologias Utilizadas
 
-# 3. Teste login:
-# Funcionário: carlos/111 → Menu completo
-# Cliente: dv/0 → Compras + Histórico
-✅ Status do Projeto
-✅ FUNCIONANDO	🔄 Em Desenvolvimento
-Autenticação	Relatórios gerenciais
-CRUD Produtos	Estoque por loja
-CRUD Clientes	Vendas por funcionário
-Busca inteligente	Export PDF
-Menus funcionário	Backup automático
-SeedData (6 produtos)	Interface web
-🛠️ Tecnologias
-text
-🌐 C# 12 (.NET 8+)
-⚡ Console Application
-📊 LINQ + Collections
-🔍 Dependency Injection
-🐛 Git + GitHub
-💻 VS Code
-📞 Acesso Rápido
-text
-🚀 INICIAR: dotnet run --project src/EcoSys.Console
-🔑 GERENTE: carlos/111
-👤 CLIENTE: dv/0
-📋 PRODUTOS: 1 → Listar/buscar
-🛒 COMPRAS: 4 → Realizar/histórico
-✍️ Autor
+C#
+
+.NET
+
+Programação Orientada a Objetos
+
+LINQ
+
+Console Application
+
+Git
+
+GitHub
+
+👨‍💻 Autor
+
 Davi José da Silva Ferreira
-Aracati, Ceará - Brasil
-Março 2026
+Aracati - Ceará, Brasil
+2026
