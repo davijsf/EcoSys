@@ -61,6 +61,8 @@ public static class SeedData
             }
         });
 
+    // PRODUTOS - LOJA DE CASTANHAS E GRÃOS
+
         empresa.Produtos.Add(new Produto
         {
             Nome = "Linhaça dourada",
