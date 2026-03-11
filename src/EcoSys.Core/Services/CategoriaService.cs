@@ -3,60 +3,52 @@ using EcoSys.Core.Entities;
 
 public class CategoriaService
 {
-    private List<Categoria> categorias = new List<Categoria>();
+    public Empresa? empresa { get; }
+
+    public CategoriaService(Empresa? empresa = null)
+    {
+        this.empresa = empresa;
+    }
 
     public void CadastrarCategoria (string nomeCategoria)
     {
         // Verifica se a categoria informada já existe
-        foreach (var categoria in categorias)
-        {
-            if (categoria.Nome.ToLower() == nomeCategoria.ToLower())
+            if (empresa?.Categorias.Any(c =>  
+            c.Nome.Equals(nomeCategoria, StringComparison.OrdinalIgnoreCase)) == true)  
             {
                 Console.WriteLine("Categoria já cadastrada");
                 return;
             }
-        }
 
-        // Criar nova categoria
-        Categoria novaCategoria = new Categoria
-        {
-            Id = categorias.Count + 1,
+        // Adiciona à lista de categorias da empresa
+        empresa?.Categorias.Add(new Categoria {
+
             Nome = nomeCategoria
-        };
 
-        // Adiciona à lista
-        categorias.Add(novaCategoria);
+        });
 
         Console.WriteLine("Categoria cadastrada com sucesso.");
     }
 
     public List<Categoria> ListarCategorias ()
     {
-        return categorias;
+        return empresa.Categorias;
     }
 
     public Categoria? BuscarCategoriaPorNome(string nome)
     {
-        foreach (var categoria in categorias)
-        {
-            if (categoria.Nome.ToLower() == nome.ToLower())
-            {
-                return categoria;
-            }
-        }
-        return null;
+        return empresa?.Categorias.FirstOrDefault(c => 
+        c.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase));
     }
 
     public bool RemoverCategoria(string nome)
     {
         var categoria = BuscarCategoriaPorNome(nome);
-
         if (categoria != null)
         {
-            categorias.Remove(categoria);
+            empresa.Categorias.Remove(categoria);
             return true;
         }
-
         return false;
     }
 }

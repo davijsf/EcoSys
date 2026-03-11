@@ -4,11 +4,21 @@ using EcoSys.Core.Entities;
 
 public class ProdutoService
 {
-    private List<Produto> produtos = new List<Produto>();
+    public Empresa? empresa { get; }
+
+    public ProdutoService (Empresa? empresa = null) {
+        this.empresa = empresa;
+    }
 
     public bool CadastrarProduto(Produto novoProduto)
     {
-        foreach(var produto in produtos)
+        if (empresa == null) 
+        {
+            Console.WriteLine("ERRO: ProdutoService sem empresa!");
+            return false;
+        }
+        
+        foreach(var produto in empresa.Produtos)
         {
             // Verifica se já existe um produto com o mesmo nome. Se sim, sai da função.
             if (produto.Nome.Equals(novoProduto.Nome, StringComparison.OrdinalIgnoreCase))
@@ -17,25 +27,18 @@ public class ProdutoService
             }
         }
         // Se não existir, adiciona à lista de produtos
-        produtos.Add(novoProduto);
+        empresa.Produtos.Add(novoProduto);
         return true;
     }
 
     public List<Produto> ListarProdutos()
     {
-        return produtos;
+        return empresa.Produtos;
     }
 
     public Produto? BuscarProdutoPorNome(string nome)
     {   
-        foreach (var produto in produtos)
-        {
-            if (produto.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase))
-            {
-                return produto;
-            }
-        }
-        return null;
+        return empresa.Produtos.FirstOrDefault(p => p.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase));
     }
 
     public List<Produto> BuscarProdutoPorCategoria(Categoria categoria)
@@ -43,7 +46,7 @@ public class ProdutoService
         // Cria uma lista vazia para os produtos encontrados
         List<Produto> resultado = new List<Produto>();
 
-        foreach(var produto in produtos)
+        foreach(var produto in empresa.Produtos)
         {   // Verifica se a categoria é a mesma
             if (produto.Categoria.Nome.Equals(categoria.Nome, StringComparison.OrdinalIgnoreCase))
             {
@@ -60,7 +63,7 @@ public class ProdutoService
         List<Produto> resultado = new List<Produto>();
 
         // percorre produtos
-        foreach (var produto in produtos)
+        foreach (var produto in empresa.Produtos)
         {   
             // percorre tags do produto 
             foreach (var t in produto.Tags)
@@ -83,7 +86,7 @@ public class ProdutoService
 
         if (produto != null)
         {
-            produtos.Remove(produto);
+            empresa.Produtos.Remove(produto);
             return true;
         }
 

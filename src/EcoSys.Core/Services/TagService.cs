@@ -4,46 +4,39 @@ using EcoSys.Core.Entities;
 
 public class TagService
 {
-    private List<Tag> tags = new List<Tag>();
+    public Empresa? empresa {get;}
+
+    public TagService(Empresa? empresa = null)
+    {
+        this.empresa = empresa;
+    }
 
     public void CadastrarTag (string nomeTag)
     {
-        foreach (var tag in tags)
+       if (empresa?.Tags.Any(c => 
+       c.Nome.Equals(nomeTag, StringComparison.OrdinalIgnoreCase)) == true)
         {
-            if (tag.Nome.ToLower() == nomeTag.ToLower())
-            {
-                Console.WriteLine("Tag já cadastrada.");
-                return;
-            }
+            Console.WriteLine("Tag já cadastrada.");
+            return;
         }
 
         // Cadastrar Tag, caso não exista ainda
-        Tag novaTag = new Tag
+        empresa?.Tags.Add(new Tag
         {
-            Id = tags.Count + 1,
             Nome = nomeTag
-        };
-
-        tags.Add(novaTag);
-
+        });
         Console.WriteLine("Tag cadastrada com sucesso.");
     }
 
     public List<Tag> ListarTags()
     {
-        return tags;
+        return empresa.Tags;
     }
 
     public Tag? BuscarTagsPorNome(string nome)
     {
-        foreach (var tag in tags)
-        {
-            if (tag.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase))
-            {
-                return tag;
-            }
-        }
-        return null;
+        return empresa?.Tags.FirstOrDefault(t => 
+        t.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase));
     }   
 
     public bool RemoverTag(string nome)
@@ -52,7 +45,7 @@ public class TagService
 
         if (tag != null)
         {
-            tags.Remove(tag);
+            empresa.Tags.Remove(tag);
             return true;
         }
 

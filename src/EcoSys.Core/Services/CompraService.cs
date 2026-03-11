@@ -12,8 +12,8 @@ public class CompraService
             Cliente = cliente,
             Loja = loja,
             Itens = itens,
-            canalVenda = canalVenda,
-            dataCompra = DateTime.Today
+            CanalVenda = canalVenda,
+            DataCompra = DateTime.Now
         };
         // Verifica se o cliente não é null | caso seja loja física
         if (cliente != null)

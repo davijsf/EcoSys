@@ -3,7 +3,12 @@ using EcoSys.Core.Entities;
 
 public class ClienteService
 {
-    private List<Cliente> clientes = new List<Cliente>();
+    public Empresa? empresa;
+
+    public ClienteService (Empresa empresa = null)
+    {
+        this.empresa = empresa;
+    } 
 
     public Cliente CadastrarCliente(Empresa empresa, string nome, string email, string senha, string login)
     {
@@ -32,20 +37,15 @@ public class ClienteService
     // Uso do ? | pode retornar um vazio
     public Cliente? BuscarClientePorLogin(string login)
     {
-        // retorna o primeiro cliente da lista | onde o login é igual ao valor do parâmetro
-        return clientes.FirstOrDefault(c => c.Login == login);
+        // retorna o cliente da lista da empresa
+        return empresa.Clientes.FirstOrDefault(c => c.Login == login);
     }
 
     public Cliente? BuscarClientePorNome(string nome)
     {   
-        foreach (var cliente in clientes)
-        {
-            if (cliente.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase))
-            {
-                return cliente;
-            }
-        }
-        return null;
+        // Verifico antes de o Nome é null | evitando warning de nullable
+        return empresa.Clientes.FirstOrDefault(c => 
+        c.Nome != null && c.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase));
     }
 
     // Listar compras do cliente

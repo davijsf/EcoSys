@@ -13,12 +13,15 @@ public class UsuarioService
 
         if (usuario is Cliente cliente)
         {   
+            // Forçando o tipo correto
+            usuario.Tipo = Enums.TipoUsuario.Cliente;
             // Adiciona à empresa 
             empresa.Clientes.Add(cliente);
         }
 
         else if (usuario is Funcionario funcionario)
         {   
+            usuario.Tipo = Enums.TipoUsuario.Funcionario;
             // Adiciona à empresa
             empresa.Funcionarios.Add(funcionario);
         }
