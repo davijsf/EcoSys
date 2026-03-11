@@ -1,7 +1,6 @@
 using EcoSys.Core.Entities;
 using EcoSys.Core.Services;
 using EcoSys.Core.Enums;
-using System.Security.Authentication;
 
 namespace EcoSys.ConsoleApp.Menus;
 
@@ -29,11 +28,13 @@ public class CompraMenu
         bool rodando = true;
 
         while (rodando) {
+            
             Console.WriteLine("\n==== MENU COMPRAS ====");
             Console.WriteLine("1 - Realizar compra");
             Console.WriteLine("2 - Ver histórico de compras");
             Console.WriteLine("0 - Voltar");
 
+            Console.Write("Esolha: ");
             string opcao = Console.ReadLine()!;
 
             switch (opcao)
@@ -45,31 +46,31 @@ public class CompraMenu
                 case "2":
                     ListarCompras();
                     break;
-            }
-            
 
+                case "0":
+                    rodando = false;
+                    break;
+            }
         }
     }
 
 
     private void RegistrarCompra()
     {
-        Console.WriteLine("Login: ");
-        string loginCliente = Console.ReadLine()!;
+        Console.Write("Login: ");
+        string loginCliente = Console.ReadLine()!.Trim();
 
-        Cliente ? cliente = null;
+        Cliente ? clienteEncontrado = clienteService.BuscarClientePorLogin(loginCliente);
 
         // Se o nome cliente nao é null e nem tem espaco em branco...
-        if(!string.IsNullOrWhiteSpace(loginCliente))
+        if(clienteEncontrado == null)
         {
-            cliente = clienteService.BuscarClientePorLogin(loginCliente);
-
-            if (cliente == null)
-            {
-                Console.WriteLine("Cliente não encontrado.");
-                return;
-            }
+            Console.WriteLine("Cliente não encontrado.");
+            Console.ReadKey();
+            return;
         }
+
+        Cliente cliente = clienteEncontrado;
 
         List<ItemCompra> itens = new List<ItemCompra>();
 
@@ -89,7 +90,7 @@ public class CompraMenu
             }   
             
             Console.Write("Quantidade: ");
-            int qtd = int.Parse(Console.ReadLine()!);
+            double qtd = double.Parse(Console.ReadLine()!);
 
             ItemCompra item = new ItemCompra{
                 Produto = produto,
@@ -139,34 +140,60 @@ public class CompraMenu
     
         double total = compraService.CalcularTotal(compra);
         Console.WriteLine($"Compra resgitrada! Total: R$ {total}");
+        Console.ReadKey();
     }
 
     private void ListarCompras()
     {
         Console.Write("Login: ");
-        string loginCliente = Console.ReadLine()!;
+        string loginClienteRaw = Console.ReadLine() ?? "";
+        string loginCliente = loginClienteRaw.Trim();
 
-        var cliente = clienteService.BuscarClientePorLogin(loginCliente);
+        if (string.IsNullOrWhiteSpace(loginCliente))
+        {
+            Console.WriteLine("Login inválido.");
+            Console.ReadKey();
+            return;
+        }
 
+        Cliente? cliente = clienteService.BuscarClientePorLogin(loginCliente);
         if (cliente == null)
         {
             Console.WriteLine("Cliente não encontrado.");
+            Console.ReadKey();
             return;
         }
 
         var compras = clienteService.ListarCompras(cliente);
 
-        foreach (var compra in compras)
+        // Verifica se não tem compras
+        if (!compras.Any())
         {
-            Console.WriteLine("\nCompra: ");
-            
-            foreach(var item in compra.Itens)
-            {   
-                Console.WriteLine($"{item.Produto.Nome} - {item.Quantidade} - R$ {item.SubTotal}");                
-            }
+            Console.WriteLine($"Cliente '{cliente.Nome}' não tem compras.");
+            Console.ReadKey();
+            return;            
         }
 
+        Console.WriteLine($"\nHistórico de {cliente.Nome}: ");
+        int numCompra = 1;
 
+        foreach (var compra in compras)
+        {
+            Console.WriteLine($"\n--- Compra #{numCompra++} ---");
+            Console.WriteLine($"Data: {compra.DataCompra}");
+            Console.WriteLine($"Canal: {compra.CanalVenda}");
+
+            if (compra.CanalVenda == CanalVenda.LOJA_FISICA) 
+            {
+                Console.WriteLine($"Loja: {compra.Loja?.Cidade}");
+                Console.WriteLine($"Total: R$ {compraService.CalcularTotal(compra):F2}");
+            }
+            
+            foreach(var item in compra.Itens)
+            {
+                Console.WriteLine($"  • {item.Produto.Nome} x{item.Quantidade} = R$ {item.SubTotal:F2}");
+            }
+        }   
     }
 }
 
