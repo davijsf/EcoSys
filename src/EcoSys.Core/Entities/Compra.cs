@@ -10,11 +10,11 @@ public class Compra
     public Loja Loja {get ; set ;}
 
     // Ecommerce ou Loja física
-    public CanalVenda canalVenda {get ; set;}
+    public CanalVenda CanalVenda {get ; set;}
     
     // Lista de produtos
     public List<ItemCompra> Itens {get ; set ;} = new List<ItemCompra>();
 
     // lançar data na hora da compra
-    public DateTime dataCompra {get ; set ;}
+    public DateTime DataCompra {get ; set ;}
 }

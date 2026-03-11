@@ -6,9 +6,6 @@ public class Funcionario : Usuario
 {
     public string? Nome {get ; set ;}
 
-    // Utilizando Enum: CAIXA, REPOSITOR E GERENTE
-    public Cargo Cargo {get ; set ;}
-    
     public double Salario {get ; set ;}
     
     public string? HorarioEntrada {get ; set ;}

@@ -11,4 +11,13 @@ public class Empresa {
     // Lista de funcionários
     public List<Funcionario> Funcionarios {get; set;} = new List<Funcionario>(); 
 
+    // Lista de produtos
+    public List<Produto> Produtos {get; set ;} = new List<Produto>();
+
+    // Lista de categorias
+    public List<Categoria> Categorias {get; set;} = new List<Categoria>();
+
+    // Lista de tags
+    public List<Tag> Tags {get; set;} = new List<Tag>();
+
 }
