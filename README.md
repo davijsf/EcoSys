@@ -1,106 +1,66 @@
-# EcoSys
+# 🌿 EcoSys
 
-Sistema de gerenciamento para uma empresa de varejo de **produtos naturais**, desenvolvido como projeto acadêmico para a disciplina de **LP2**.
+O **EcoSys** é um sistema de gerenciamento desenvolvido em **C# (.NET)** para auxiliar no controle de uma empresa de varejo de produtos naturais. O sistema informatiza processos básicos de uma rede de lojas físicas, permitindo o gerenciamento de produtos, clientes, funcionários e compras através de uma interface interativa via terminal.
 
-O objetivo do sistema é informatizar o fluxo de trabalho da empresa, que possui lojas físicas e comercializa produtos como castanha, amendoim, linhaça, mel de caju e outros itens naturais.
+Este projeto foi desenvolvido como atividade acadêmica da disciplina **Laboratório de Programação 2 (LP2)**, com foco na aplicação de **Programação Orientada a Objetos**, **arquitetura em camadas** e boas práticas de desenvolvimento em C#.
 
----
+## 🎯 Objetivos do Sistema
 
-## Estrutura do Projeto
+O sistema resolve tarefas comuns de uma empresa de varejo, como:
 
-O projeto está organizado em duas camadas principais:
+- 🏪 Gerenciamento de produtos
+- 👥 Cadastro e controle de clientes
+- 🔐 Autenticação de usuários
+- 🛒 Registro de compras
+- 📂 Organização de produtos por categorias e tags
+- 📱 Navegação por menus no terminal
+
+## 🧱 Arquitetura do Projeto
+
+O projeto foi estruturado em **duas camadas principais**:
+
+| Camada | Responsabilidade | Conteúdo |
+|--------|------------------|----------|
+| **EcoSys.Core** | Regra de negócio e domínio | Entidades, enumerações, serviços |
+| **EcoSys.Console** | Interface com o usuário | Menus interativos, fluxo de execução, inicialização de dados |
+
+## 📁 Estrutura do Projeto
 
 ```
 EcoSys
-│
-├─ src
-│   ├─ EcoSys.Console
-│   │   Aplicação de console responsável pela interação com o usuário
-│   │
-│   └─ EcoSys.Core
-│       Contém as entidades, enums e regras centrais do sistema
+├── src
+│   ├── EcoSys.Console
+│   │   ├── Application.cs
+│   │   ├── Data
+│   │   │   └── SeedData.cs
+│   │   └── Menus
+│   └── EcoSys.Core
+│       ├── Entities
+│       ├── Enums
+│       └── Services
 ```
 
-### EcoSys.Core
 
-Responsável pela modelagem do domínio do sistema.
+text
 
-**Entities**
+## 🛠️ Tecnologias Utilizadas
 
-* Empresa
-* Loja
-* Funcionario
-* Cliente
-* Produto
-* Categoria
-* Tag
-* Compra
+![Tecnologias](https://img.shields.io/badge/C%23-.NET-blue?style=flat&logo=c-sharp&logoColor=white)
+![Tecnologias](https://img.shields.io/badge/LINQ-orange?style=flat&logo=dotnet&logoColor=white)
 
-**Enums**
+- **C#**
+- **.NET**
+- **Programação Orientada a Objetos**
+- **LINQ**
+- **Console Application**
+- **Git**
+- **GitHub**
 
-* Cargo
-* RegimeContratual
-* TipoVenda
+## 👨‍💻 Autor
 
-### EcoSys.Console
+**Davi José da Silva Ferreira**
 
-Projeto responsável por executar o sistema e permitir interação via terminal.
+*Aracati - Ceará, Brasil*  
+*2026*
 
 ---
-
-## Regras de Negócio Modeladas
-
-* A empresa possui **múltiplas lojas físicas**.
-
-* Cada loja possui **funcionários com cargos específicos**.
-
-* Funcionários possuem:
-
-  * salário
-  * horário de entrada e saída
-  * regime contratual (CLT ou CNPJ)
-
-* A loja comercializa **produtos naturais**.
-
-* Cada produto:
-
-  * pertence a **uma única categoria**
-  * possui **múltiplas tags**
-  * pode ser vendido por **unidade ou por quilo**.
-
----
-
-## Tecnologias Utilizadas
-
-* C#
-* .NET
-* Git
-* VS Code
-
----
-
-## Como executar o projeto
-
-1. Clone o repositório
-
-```
-git clone <url-do-repositorio>
-```
-
-2. Acesse a pasta do projeto
-
-```
-cd EcoSys
-```
-
-3. Execute o projeto de console
-
-```
-dotnet run --project src/EcoSys.Console
-```
-
----
-
-## Autor
-
-Davi José da Silva Ferreira
