@@ -62,7 +62,6 @@ public class CompraMenu
 
         Cliente ? clienteEncontrado = clienteService.BuscarClientePorLogin(loginCliente);
 
-        // Se o nome cliente nao é null e nem tem espaco em branco...
         if(clienteEncontrado == null)
         {
             Console.WriteLine("Cliente não encontrado.");

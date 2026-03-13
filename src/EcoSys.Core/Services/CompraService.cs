@@ -15,12 +15,12 @@ public class CompraService
             CanalVenda = canalVenda,
             DataCompra = DateTime.Now
         };
+
         // Verifica se o cliente não é null | caso seja loja física
         if (cliente != null)
         {
             cliente.HistoricoCompras.Add(compra);
         }
-        
         return compra;
     }
 

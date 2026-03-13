@@ -226,6 +226,7 @@ public static class SeedData
         // =========================
         // CLIENTES
         // =========================
+
         Cliente clienteDv = new Cliente
         {
             Login = "dv",
@@ -234,7 +235,6 @@ public static class SeedData
             Email = "dv@email.com"
         };
         empresa.Clientes.Add(clienteDv);
-
         Cliente clienteJs = new Cliente
         {
             Login = "js",
@@ -242,6 +242,7 @@ public static class SeedData
             Nome = "João",
             Email = "js@email.com"
         };
+        
         empresa.Clientes.Add(clienteJs);
 
         // Adiciona no UsuarioService (para login funcionar)

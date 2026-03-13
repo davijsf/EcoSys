@@ -29,6 +29,7 @@ public class Application
         clienteService = new ClienteService(empresa);
         categoriaService = new CategoriaService(empresa);
         tagService = new TagService(empresa);
+
         // compraService e usuarioService não precisam de empresa
 
         // 5. Menus
@@ -261,11 +262,7 @@ public class Application
         Console.WriteLine($"Usuário: {usuario.Login}");
         Console.WriteLine($"Cargo: {usuario.Cargo}");
 
-        Console.WriteLine($"DEBUG: Cargo = {usuario.Cargo} | Cargo.HasValue = {usuario.Cargo.HasValue}");
-
-        Console.WriteLine();
-
-        Console.WriteLine("1 - Produtos");
+        Console.WriteLine("\n1 - Produtos");
         Console.WriteLine("2 - Categorias");
         Console.WriteLine("3 - Tags");
         Console.WriteLine("4 - Compras");

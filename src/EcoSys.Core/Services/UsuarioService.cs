@@ -7,7 +7,15 @@ public class UsuarioService
 
     public void AdicionarUsuario(Usuario usuario)
     {
-        // Sempre adiciona na lista geral de users
+        // Adiciona na lista geral de users
+        // Mas verifico antes se já existe esse usuario
+        if (usuarios?.Any( u => u.Login.Equals(usuario.Login, StringComparison.OrdinalIgnoreCase)) == true)
+        {
+            Console.WriteLine("Usuário já cadastrado.");
+            return;
+        }
+
+        // Se não, cadastro ele na lista geral de users
         usuarios.Add(usuario);
 
 
