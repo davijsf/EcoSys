@@ -17,4 +17,7 @@ public class Compra
 
     // lançar data na hora da compra
     public DateTime DataCompra {get ; set ;}
+
+    // total da compra 
+    public double Total {get ; set ;}
 }
