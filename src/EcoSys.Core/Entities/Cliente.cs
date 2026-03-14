@@ -10,6 +10,6 @@ public class Cliente : Usuario
     // Email e senha podem ser nulos, caso seja Loja física.
     public string? Email {get ; set ;}
     
-    // Lista de compras do Cliente
+    // Histórico de compras do Cliente
     public List<Compra> HistoricoCompras {get ; set ;} = new List<Compra>();
 }
