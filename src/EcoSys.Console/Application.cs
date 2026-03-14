@@ -6,6 +6,12 @@ using EcoSys.ConsoleApp.Data;
 
 namespace EcoSys.ConsoleApp;
 
+
+// Ao realizar o cadastro e atualização dos dados, deve haver a validação dos campos de entrada na interface console. 
+// Agora, um funcionário pode ter mais de uma atribuição (ser caixa e gerente ao mesmo tempo). Além das atribuições “caixa”, “repositor” ou “gerente”, há também a atribuição “entregador”.
+// A interface console deve possuir menus para permitir navegar pelas diferentes funcionalidades do sistema;
+// O sistema deve permitir ao gerente a visualização de relatório das vendas realizadas no ano e mês selecionado.
+
 public class Application
 {
     public static void Main(string[] args)
@@ -29,6 +35,7 @@ public class Application
         clienteService = new ClienteService(empresa);
         categoriaService = new CategoriaService(empresa);
         tagService = new TagService(empresa);
+        compraService = new CompraService(empresa);
 
         // compraService e usuarioService não precisam de empresa
 
@@ -122,6 +129,8 @@ public class Application
             Console.WriteLine("2 - Adicionar produto ao carrinho");
             Console.WriteLine("3 - Ver carrinho");
             Console.WriteLine("4 - Finalizar compra");
+            Console.WriteLine("5 - Ver histórico de compras");
+
             Console.WriteLine("0 - Logout");
 
             string opcao = Console.ReadLine()!;
@@ -208,29 +217,69 @@ public class Application
                     break;
 
                 case "4":
-
-                    if (carrinho.Count == 0)
+                   if (!carrinho.Any())
                     {
-                        Console.WriteLine("Carrinho vazio.");
+                        Console.WriteLine("Carrinho vazio! Adicione itens primeiro.");
                         Console.ReadKey();
                         break;
                     }
 
-                    Loja loja = new Loja();
+                    Console.WriteLine("\n -- FINALIZAR COMPRA --");
+                    
+                    var itensCompra = new List<ItemCompra>(carrinho);
 
-                    var compra = compraService.RegistrarCompra(
-                        cliente,
-                        loja,
-                        carrinho,
-                        CanalVenda.ECOMMERCE
-                    );
+                    // Calcula total da compra
+                    double totalCompra = itensCompra.Sum(i => (double)i.SubTotal);
+                    Console.WriteLine($"Total: R$ {totalCompra}");
 
-                    double total = compraService.CalcularTotal(compra);
+                    // Registra compra com carrinho
+                    var compra = compraService.RegistrarCompra(cliente, null , itensCompra, CanalVenda.LOJA_FISICA);
 
-                    Console.WriteLine($"Compra realizada! Total: R$ {total}");
-
+                    // Limpa carrinho após a compra
                     carrinho.Clear();
 
+                    Console.WriteLine($"\nCompra registrada com {itensCompra.Count} item(ns)!");
+                    Console.ReadKey();
+                    break;
+
+                case "5":
+                    var compras = compraService.ListarCompras(cliente);
+
+                    if (!compras.Any())
+                    {
+                        Console.WriteLine("Nenhuma compra encontrada.");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                    int numCompra = 1;
+                    int numItem = 1;
+                    foreach(var buy in compras) 
+                    {
+                        Console.WriteLine($"\n--- Compra #{numCompra++} ---");
+                        Console.WriteLine($"Data: {buy.DataCompra: dd/MM/yyyy HH:mm}");
+
+                        if (buy.Itens == null || !buy.Itens.Any())
+                        {
+                            Console.WriteLine(" -> Nenhum item nesta compra.");
+                        } 
+
+                        else
+                        {
+                            double total = 0;
+                            numItem = 1;
+                            foreach (var i in buy.Itens)
+                            {
+                                Console.WriteLine($"\n-- Item: #{numItem++}");
+                                Console.WriteLine($"Nome: {i.Produto.Nome}");
+                                Console.WriteLine($"Preço unitário: R$ {i.PrecoUnitario}");
+                                Console.WriteLine($"Quantidade: {i.Quantidade}");
+                                Console.WriteLine($"SubTotal: R$ {i.SubTotal}");
+                                total += i.SubTotal;
+                            }
+                             Console.WriteLine($"\nTOTAL COMPRA: R$ {total:C}");
+                        } 
+                    }
                     Console.ReadKey();
                     break;
 
