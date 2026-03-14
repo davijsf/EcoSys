@@ -1,7 +1,7 @@
 namespace EcoSys.Core.Entities;
 
 public class Empresa {
-    public string Nome {get ; set ;}
+    public string ? Nome {get ; set ;}
     
     public List<Loja> Lojas {get ; set ;} = new List<Loja>();
 
@@ -20,4 +20,7 @@ public class Empresa {
     // Lista de tags
     public List<Tag> Tags {get; set;} = new List<Tag>();
 
+    // Lista de compras 
+    public List<Compra> Compras {get ; set ;} = new List<Compra>();
+    
 }
