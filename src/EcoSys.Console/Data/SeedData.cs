@@ -7,11 +7,11 @@ namespace EcoSys.ConsoleApp.Data;
 public static class SeedData
 {
     public static Empresa Inicializar(
+        Empresa empresa,
         ProdutoService produtoService,
         ClienteService clienteService,
         UsuarioService usuarioService)
     {
-        Empresa empresa = new Empresa { Nome = "EcoSys" };
 
         // 1. PRIMEIRO CATEGORIAS
         empresa.Categorias.Add(new Categoria { Nome = "Castanhas" });
@@ -172,7 +172,7 @@ public static class SeedData
             Login = "joseh",
             Senha = "1010",
             Nome = "José",
-            Cargo = Cargo.GERENTE,
+            Cargo = Cargo.GERENTE | Cargo.CAIXA,
             Salario = 6000.00,
             Tipo = TipoUsuario.Funcionario,
             RegimeContratual = RegimeContratual.PJ
@@ -217,7 +217,7 @@ public static class SeedData
             Login = "jairo78",
             Senha = "6655",
             Nome = "Jairo",
-            Cargo = Cargo.GERENTE,
+            Cargo = Cargo.GERENTE | Cargo.CAIXA, // GERENTE E CAIXA AO MESMO TEMPO
             Salario = 5600.00,
             Tipo = TipoUsuario.Funcionario,
             RegimeContratual = RegimeContratual.CLT
@@ -226,28 +226,17 @@ public static class SeedData
         // =========================
         // CLIENTES
         // =========================
-
-        Cliente clienteDv = new Cliente
-        {
-            Login = "dv",
-            Senha = "0",
-            Nome = "Davi",
-            Email = "dv@email.com"
-        };
-        empresa.Clientes.Add(clienteDv);
-        Cliente clienteJs = new Cliente
-        {
-            Login = "js",
-            Senha = "1",
-            Nome = "João",
-            Email = "js@email.com"
-        };
         
-        empresa.Clientes.Add(clienteJs);
+        var clienteDv = clienteService.CadastrarCliente("Davi rozehpe", "dv@email.com", "0", "dv");
 
-        // Adiciona no UsuarioService (para login funcionar)
-        usuarioService.AdicionarUsuario(clienteDv);
-        usuarioService.AdicionarUsuario(clienteJs);
+        var clienteJs = clienteService.CadastrarCliente("Joseh", "joseh@email.com", "1234", "js");
+
+        // Adiciona no UsuarioService
+        if (clienteDv != null)
+            usuarioService.AdicionarUsuario(clienteDv);
+
+        if (clienteJs != null) 
+            usuarioService.AdicionarUsuario(clienteJs);
 
         return empresa;
     }
