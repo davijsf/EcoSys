@@ -20,7 +20,10 @@ public class Empresa {
     // Lista de tags
     public List<Tag> Tags {get; set;} = new List<Tag>();
 
-    // Lista de compras 
+    // Lista de compras dos clientes -- lista de vendas da empresa 
     public List<Compra> Compras {get ; set ;} = new List<Compra>();
+
+    // Lista de usuários 
+    public List<Usuario> Usuarios {get ; set ;} = new List<Usuario>();
     
 }
