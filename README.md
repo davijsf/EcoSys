@@ -33,6 +33,8 @@ EcoSys
 │   │   ├── Application.cs
 │   │   ├── Data
 │   │   │   └── SeedData.cs
+|   |   ├── Validation
+|   |   |   └── Valid.cs
 │   │   └── Menus
 │   └── EcoSys.Core
 │       ├── Entities
