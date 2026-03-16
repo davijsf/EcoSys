@@ -4,16 +4,16 @@ using EcoSys.Core.Entities;
 
 public class TagService
 {
-    public Empresa? empresa {get;}
+    private readonly Empresa _empresa; 
 
-    public TagService(Empresa? empresa = null)
+    public TagService(Empresa empresa)
     {
-        this.empresa = empresa;
+        _empresa = empresa ?? throw new ArgumentNullException(nameof(empresa));
     }
 
     public void CadastrarTag (string nomeTag)
     {
-       if (empresa?.Tags.Any(c => 
+       if (_empresa?.Tags.Any(c => 
        c.Nome.Equals(nomeTag, StringComparison.OrdinalIgnoreCase)) == true)
         {
             Console.WriteLine("Tag já cadastrada.");
@@ -21,7 +21,7 @@ public class TagService
         }
 
         // Cadastrar Tag, caso não exista ainda
-        empresa?.Tags.Add(new Tag
+        _empresa?.Tags.Add(new Tag
         {
             Nome = nomeTag
         });
@@ -30,12 +30,12 @@ public class TagService
 
     public List<Tag> ListarTags()
     {
-        return empresa.Tags;
+        return _empresa.Tags;
     }
 
     public Tag? BuscarTagsPorNome(string nome)
     {
-        return empresa?.Tags.FirstOrDefault(t => 
+        return _empresa?.Tags.FirstOrDefault(t => 
         t.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase));
     }   
 
@@ -45,7 +45,7 @@ public class TagService
 
         if (tag != null)
         {
-            empresa.Tags.Remove(tag);
+            _empresa.Tags.Remove(tag);
             return true;
         }
 

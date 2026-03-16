@@ -3,17 +3,17 @@ using EcoSys.Core.Entities;
 
 public class CategoriaService
 {
-    public Empresa? empresa { get; }
+    private readonly Empresa _empresa;
 
-    public CategoriaService(Empresa? empresa = null)
+    public CategoriaService(Empresa empresa)
     {
-        this.empresa = empresa;
+        _empresa = empresa ?? throw new ArgumentNullException(nameof(empresa));
     }
 
     public void CadastrarCategoria (string nomeCategoria)
     {
         // Verifica se a categoria informada já existe
-            if (empresa?.Categorias.Any(c =>  
+            if (_empresa?.Categorias.Any(c =>  
             c.Nome.Equals(nomeCategoria, StringComparison.OrdinalIgnoreCase)) == true)  
             {
                 Console.WriteLine("Categoria já cadastrada");
@@ -21,7 +21,7 @@ public class CategoriaService
             }
 
         // Adiciona à lista de categorias da empresa
-        empresa?.Categorias.Add(new Categoria {
+        _empresa?.Categorias.Add(new Categoria {
 
             Nome = nomeCategoria
 
@@ -32,12 +32,12 @@ public class CategoriaService
 
     public List<Categoria> ListarCategorias ()
     {
-        return empresa.Categorias;
+        return _empresa.Categorias;
     }
 
     public Categoria? BuscarCategoriaPorNome(string nome)
     {
-        return empresa?.Categorias.FirstOrDefault(c => 
+        return _empresa?.Categorias.FirstOrDefault(c => 
         c.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase));
     }
 
@@ -46,7 +46,7 @@ public class CategoriaService
         var categoria = BuscarCategoriaPorNome(nome);
         if (categoria != null)
         {
-            empresa.Categorias.Remove(categoria);
+            _empresa.Categorias.Remove(categoria);
             return true;
         }
         return false;

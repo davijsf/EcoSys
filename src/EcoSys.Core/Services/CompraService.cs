@@ -5,14 +5,14 @@ using EcoSys.Core.Entities;
 
 public class CompraService
 {
-    public Empresa? empresa;
+    private readonly Empresa _empresa;
 
-    public CompraService (Empresa? empresa = null)
+    public CompraService (Empresa empresa)
     {
-        this.empresa = empresa;
+        _empresa = empresa ?? throw new ArgumentNullException(nameof(empresa));
     } 
 
-    public Compra RegistrarCompra( Cliente ? cliente, Loja loja, List<ItemCompra> itens, CanalVenda canalVenda)
+    public Compra RegistrarCompra( Cliente ? cliente, Loja ? loja, List<ItemCompra> itens, CanalVenda canalVenda)
     {
 
         // Valida itens
@@ -25,7 +25,7 @@ public class CompraService
         Compra compra = new Compra
         {
             Cliente = cliente,
-            Loja =  loja,
+            Loja = loja,
             Itens = itens,
             CanalVenda = canalVenda,
             DataCompra = DateTime.Now,
@@ -33,7 +33,7 @@ public class CompraService
         };
 
         // Salva na empresa (principal)
-        empresa?.Compras.Add(compra);
+        _empresa?.Compras.Add(compra);
 
         // Adiciona no histórico do cliente (se existir)
         if (cliente != null)
@@ -46,7 +46,7 @@ public class CompraService
 
     public List<Compra> ListarCompras(Cliente cliente)
     {
-        return empresa?.Compras?
+        return _empresa?.Compras?
         .Where(c => c?.Cliente != null && c.Cliente.Login == cliente.Login)
         .OrderByDescending(c => c.DataCompra)
         .ToList() ?? new List<Compra>();

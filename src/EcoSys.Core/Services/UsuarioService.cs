@@ -2,43 +2,31 @@ namespace EcoSys.Core.Entities;
 
 public class UsuarioService
 {
-    private List<Usuario> usuarios = new();
-    Empresa empresa = new Empresa();
+    private readonly Empresa _empresa;
+
+    public UsuarioService(Empresa empresa)
+    {
+        _empresa = empresa ?? throw new ArgumentNullException(nameof(empresa));
+    }
 
     public void AdicionarUsuario(Usuario usuario)
     {
         // Adiciona na lista geral de users
         // Mas verifico antes se já existe esse usuario
-        if (usuarios?.Any( u => u.Login.Equals(usuario.Login, StringComparison.OrdinalIgnoreCase)) == true)
+        if (_empresa.Usuarios.Any( u => u.Login.Equals(usuario.Login, StringComparison.OrdinalIgnoreCase)) == true)
         {
             Console.WriteLine("Usuário já cadastrado.");
             return;
         }
 
         // Se não, cadastro ele na lista geral de users
-        usuarios.Add(usuario);
-
-
-        if (usuario is Cliente cliente)
-        {   
-            // Forçando o tipo correto
-            usuario.Tipo = Enums.TipoUsuario.Cliente;
-            // Adiciona à empresa 
-            empresa.Clientes.Add(cliente);
-        }
-
-        else if (usuario is Funcionario funcionario)
-        {   
-            usuario.Tipo = Enums.TipoUsuario.Funcionario;
-            // Adiciona à empresa
-            empresa.Funcionarios.Add(funcionario);
-        }
+        _empresa.Usuarios.Add(usuario);
     }
 
     public Usuario? Autenticar(string login, string senha)
     {
         // Autenticação na lista geral de usuários
-        return usuarios.FirstOrDefault(
+        return _empresa.Usuarios.FirstOrDefault(
             u => u.Login == login && u.Senha == senha
         );
     }

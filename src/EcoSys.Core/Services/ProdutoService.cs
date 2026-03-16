@@ -4,78 +4,51 @@ using EcoSys.Core.Entities;
 
 public class ProdutoService
 {
-    public Empresa? empresa { get; }
+    private readonly Empresa _empresa;
 
-    public ProdutoService (Empresa? empresa = null) {
-        this.empresa = empresa;
+    public ProdutoService (Empresa empresa) {
+        _empresa = empresa ?? throw new ArgumentNullException(nameof(empresa));
     }
 
     public bool CadastrarProduto(Produto novoProduto)
-    {
-        if (empresa == null) 
-        {
-            Console.WriteLine("ERRO: ProdutoService sem empresa!");
-            return false;
-        }
-        
-        foreach(var produto in empresa.Produtos)
+    {   
+        foreach(var produto in _empresa.Produtos)
         {
             // Verifica se já existe um produto com o mesmo nome. Se sim, sai da função.
-            if (produto.Nome.Equals(novoProduto.Nome, StringComparison.OrdinalIgnoreCase))
+            if (produto.Nome?.Equals(novoProduto.Nome, StringComparison.OrdinalIgnoreCase) == true)
             {
                 return false;
             }
         }
         // Se não existir, adiciona à lista de produtos
-        empresa.Produtos.Add(novoProduto);
+        _empresa.Produtos.Add(novoProduto);
         return true;
     }
 
     public List<Produto> ListarProdutos()
     {
-        return empresa.Produtos;
+        return _empresa.Produtos;
     }
 
     public Produto? BuscarProdutoPorNome(string nome)
     {   
-        return empresa.Produtos.FirstOrDefault(p => p.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase));
+        return _empresa.Produtos.FirstOrDefault(p => p.Nome?.Equals(nome, StringComparison.OrdinalIgnoreCase) == true);
     }
+
 
     public List<Produto> BuscarProdutoPorCategoria(Categoria categoria)
     {
-        // Cria uma lista vazia para os produtos encontrados
-        List<Produto> resultado = new List<Produto>();
-
-        foreach(var produto in empresa.Produtos)
-        {   // Verifica se a categoria é a mesma
-            if (produto.Categoria.Nome.Equals(categoria.Nome, StringComparison.OrdinalIgnoreCase))
-            {
-                // Se sim, adiciona o produto à lista de resultados
-                resultado.Add(produto);
-            }
-        }
-        return resultado;
+        return _empresa.Produtos
+        .Where(p => p.Categoria?.Nome?.Equals(categoria.Nome, StringComparison.OrdinalIgnoreCase)== true)
+        .ToList();
     }
 
     public List<Produto> BuscarProdutoPorTags(Tag tag)
     {
-        // Cria uma lista vazia para os produtos encontrados
-        List<Produto> resultado = new List<Produto>();
-
-        // percorre produtos
-        foreach (var produto in empresa.Produtos)
-        {   
-            // percorre tags do produto 
-            foreach (var t in produto.Tags)
-            {
-                if (t.Nome.Equals(tag.Nome, StringComparison.OrdinalIgnoreCase))
-                {
-                    resultado.Add(produto);
-                    break; // Evita add o mesmo produto duas vezes
-                }
-            }
-        }
-        return resultado;
+        return _empresa.Produtos
+        .Where(p => p.Tags?.Any(t => t.Nome?.Equals(tag.Nome, StringComparison.OrdinalIgnoreCase) == true) 
+        == true)
+        .ToList();
     }
 
     public bool RemoverProduto(string nome)
@@ -84,7 +57,7 @@ public class ProdutoService
 
         if (produto != null)
         {
-            empresa.Produtos.Remove(produto);
+            _empresa.Produtos.Remove(produto);
             return true;
         }
 
