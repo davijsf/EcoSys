@@ -31,7 +31,7 @@ public class CompraMenu
             
             Console.WriteLine("\n==== MENU COMPRAS ====");
             Console.WriteLine("1 - Realizar compra");
-            Console.WriteLine("2 - Ver histórico de compras");
+            Console.WriteLine("2 - Ver histórico de compras do cliente.");
             Console.WriteLine("0 - Voltar");
 
             Console.Write("Esolha: ");
