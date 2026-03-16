@@ -3,7 +3,7 @@ using EcoSys.Core.Enums;
 
 public class Produto
 {
-    public string? Nome {get ; set ;}
+    public string ? Nome {get ; set ;}
     public double Preco {get ; set ;}
 
     public UnidadeMedida UnidadeMedida {get ; set ;}
