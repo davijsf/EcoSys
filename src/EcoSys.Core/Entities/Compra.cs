@@ -7,7 +7,7 @@ public class Compra
     // Cliente pode ser nulo. Representando compra sem cadastro na loja fisica
     public Cliente ? Cliente {get; set ;}
 
-    public Loja Loja {get ; set ;}
+    public Loja ? Loja {get ; set ;}
 
     // Ecommerce ou Loja física
     public CanalVenda CanalVenda {get ; set;}
