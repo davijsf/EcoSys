@@ -12,4 +12,6 @@ public class Funcionario : Usuario
     public string? HorarioSaida {get ; set ;}
 
     public RegimeContratual RegimeContratual {get ; set ;}
+
+    public Cargo Cargo {get; set;}
 }
