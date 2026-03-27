@@ -78,9 +78,9 @@ public class CompraMenu
         while (adicionando)
         {
             Console.Write("Nome do produto: ");
-            string nomeProduto = Console.ReadLine()!;
+            string buscaProduto = Console.ReadLine()!;
 
-            var produto = produtoService.BuscarProdutoPorNome(nomeProduto);
+            var produto = produtoService.BuscarProduto(buscaProduto);
 
             if (produto == null)
             {
@@ -190,7 +190,7 @@ public class CompraMenu
             
             foreach(var item in compra.Itens)
             {
-                Console.WriteLine($"  • {item.Produto.Nome} x{item.Quantidade} = R$ {item.SubTotal:F2}");
+                Console.WriteLine($"  • {item?.Produto?.Nome} x{item?.Quantidade} = R$ {item?.SubTotal:F2}");
             }
         }   
     }
