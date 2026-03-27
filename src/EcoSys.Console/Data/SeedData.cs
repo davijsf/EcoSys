@@ -33,7 +33,7 @@ public static class SeedData
         // =========================
         // PRODUTOS
         // =========================
-        empresa.Produtos.Add(new Produto
+        produtoService.CadastrarProduto(new Produto
         {
             Nome = "Castanha de caju",
             Preco = 45.90,
@@ -47,7 +47,7 @@ public static class SeedData
             }
         });
 
-        empresa.Produtos.Add(new Produto
+        produtoService.CadastrarProduto(new Produto
         {
             Nome = "Amendoim torrado",  // ← APENAS 1x!
             Preco = 22.50,
@@ -63,7 +63,7 @@ public static class SeedData
 
     // PRODUTOS - LOJA DE CASTANHAS E GRÃOS
 
-        empresa.Produtos.Add(new Produto
+        produtoService.CadastrarProduto(new Produto
         {
             Nome = "Linhaça dourada",
             Preco = 18.90,
@@ -77,7 +77,7 @@ public static class SeedData
             }
         });
 
-        empresa.Produtos.Add(new Produto
+        produtoService.CadastrarProduto(new Produto
         {
             Nome = "Mel de caju",
             Preco = 38.00,
@@ -92,7 +92,7 @@ public static class SeedData
         });
 
         // Produtos avulsos (unidade)
-        empresa.Produtos.Add(new Produto
+        produtoService.CadastrarProduto(new Produto
         {
             Nome = "Castanha de caju unidade",
             Preco = 2.50,
@@ -105,7 +105,7 @@ public static class SeedData
             }
         });
 
-        empresa.Produtos.Add(new Produto
+        produtoService.CadastrarProduto(new Produto
         {
             Nome = "Amendoim unidade",
             Preco = 0.80,
