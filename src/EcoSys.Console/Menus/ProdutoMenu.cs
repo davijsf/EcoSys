@@ -23,7 +23,7 @@ public class ProdutoMenu
             Console.WriteLine("2 - Listar produtos.");
             Console.WriteLine("3 - Remover produto.");
             Console.WriteLine("4 - Atualizar preço de produto.");
-            Console.WriteLine("5 - Buscar produto pelo nome.");
+            Console.WriteLine("5 - Buscar produto.");
             Console.WriteLine("6 - Buscar produto pela categoria.");
             Console.WriteLine("7 - Buscar produto pela tag.");
             Console.WriteLine("0 - Voltar");
@@ -93,13 +93,13 @@ public class ProdutoMenu
 
         foreach (var produto in produtos)
         {
-            Console.WriteLine($"{produto.Nome} - R$ {produto.Preco}");
+            Console.WriteLine($"Id: {produto.Id} - {produto.Nome} - R$ {produto.Preco}");
         }
     }
 
     private void RemoverProduto()
     {
-        Console.Write("Nome do produto: ");
+        Console.Write("Nome(ou código) do produto: ");
         string nome = Console.ReadLine()!;
 
         var resultado = produtoService.RemoverProduto(nome);
@@ -110,7 +110,7 @@ public class ProdutoMenu
 
     private void AtualizarPrecoProduto()
     {
-        Console.Write("Nome do produto: ");
+        Console.Write("Nome(ou código) do produto: ");
         string nome = Console.ReadLine()!;
 
         Console.Write("Novo preço: R$ ");
@@ -124,10 +124,10 @@ public class ProdutoMenu
 
     private void BuscarProdutoPorNome()
     {
-        Console.Write("Nome do produto: ");
-        string nome = Console.ReadLine()!;
+        Console.Write("Nome(ou código) do produto: ");
+        string busca = Console.ReadLine()!;
 
-        var resultado = produtoService.BuscarProdutoPorNome(nome);
+        var resultado = produtoService.BuscarProduto(busca);
 
         if (resultado != null)
         {
