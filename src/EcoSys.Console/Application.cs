@@ -110,10 +110,7 @@ public class Application
                     //pergunta "continuar?" APÓS o menu sair
                     Console.Write("\nDeseja fazer outro login? [s/n]: ");
                     if (Console.ReadLine()?.Trim().ToLower() != "s")
-                    {
-                        Console.WriteLine("Programa encerrado!");
                         break;
-                    }
                 break;
 
 
@@ -208,10 +205,10 @@ public class Application
                     break;
 
                 case "2":
-                    Console.Write("Nome do produto: ");
-                    string nome = Console.ReadLine()?.Trim() ?? "";
-                    
-                    var produto = produtoService.BuscarProdutoPorNome(nome);
+                    Console.Write("Nome(ou código) do produto: ");
+                    string busca = Console.ReadLine()?.Trim() ?? "";
+                        
+                    var produto = produtoService.BuscarProduto(busca);
                     if (produto == null)
                     {
                         Console.WriteLine("Produto não encontrado.");
@@ -401,7 +398,7 @@ public class Application
             case "2":
 
                 // Somente GERENTE
-                if (funcionario.Tipo.HasFlag(Cargo.GERENTE))
+                if (funcionario.Cargo.HasFlag(Cargo.GERENTE))
                 {
                     categoriaMenu.MenuCategorias();
                 }
