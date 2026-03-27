@@ -1,10 +1,7 @@
-using EcoSys.Core.Enums;
-
 namespace EcoSys.Core.Entities;
 
 public class Cliente : Usuario
 {
-
     public string ? Nome {get ; set ;}
     
     // Email e senha podem ser nulos, caso seja Loja física.

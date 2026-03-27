@@ -12,7 +12,7 @@ public class CompraService
         _empresa = empresa ?? throw new ArgumentNullException(nameof(empresa));
     } 
 
-    public Compra RegistrarCompra( Cliente ? cliente, Loja ? loja, List<ItemCompra> itens, CanalVenda canalVenda)
+    public Compra RegistrarCompra(Cliente ? cliente, Loja ? loja, List<ItemCompra> itens, CanalVenda canalVenda)
     {
 
         // Valida itens
@@ -44,6 +44,7 @@ public class CompraService
         return compra;
     }
 
+    // Vendas da empresa 
     public List<Compra> ListarCompras(Cliente cliente)
     {
         return _empresa?.Compras?

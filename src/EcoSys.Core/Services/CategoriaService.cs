@@ -3,7 +3,7 @@ using EcoSys.Core.Entities;
 
 public class CategoriaService
 {
-    private readonly Empresa _empresa;
+    private readonly Empresa _empresa; // campo imutável (readonly)
 
     public CategoriaService(Empresa empresa)
     {
