@@ -12,27 +12,35 @@ public class ProdutoService
 
     public bool CadastrarProduto(Produto novoProduto)
     {   
-        foreach(var produto in _empresa.Produtos)
-        {
-            // Verifica se já existe um produto com o mesmo nome. Se sim, sai da função.
-            if (produto.Nome?.Equals(novoProduto.Nome, StringComparison.OrdinalIgnoreCase) == true)
-            {
-                return false;
-            }
-        }
+        bool jaExiste = _empresa.Produtos.Any(p => 
+        p.Nome?.Equals(novoProduto.Nome, StringComparison.OrdinalIgnoreCase) == true);
+
+        if (jaExiste) return false;
+
+        // Inserção auto - codigo de barras:
+        novoProduto.Id = GerarCodigoBarras();
+
         // Se não existir, adiciona à lista de produtos
-        _empresa.Produtos.Add(novoProduto);
+        _empresa.AdicionarProduto(novoProduto);
         return true;
     }
 
-    public List<Produto> ListarProdutos()
+    private string GerarCodigoBarras()
+    {
+        int nextNumber = _empresa.Produtos.Count + 1;
+        return nextNumber.ToString("D8");
+    }
+
+    public IReadOnlyList<Produto> ListarProdutos()
     {
         return _empresa.Produtos;
     }
 
-    public Produto? BuscarProdutoPorNome(string nome)
+    public Produto? BuscarProduto(string busca)
     {   
-        return _empresa.Produtos.FirstOrDefault(p => p.Nome?.Equals(nome, StringComparison.OrdinalIgnoreCase) == true);
+        return _empresa.Produtos.FirstOrDefault(p => 
+        p.Id == busca ||
+        p.Nome?.Equals(busca, StringComparison.OrdinalIgnoreCase) == true);
     }
 
 
@@ -51,13 +59,13 @@ public class ProdutoService
         .ToList();
     }
 
-    public bool RemoverProduto(string nome)
+    public bool RemoverProduto(string busca)
     {
-        var produto = BuscarProdutoPorNome(nome);
+        var produto = BuscarProduto(busca);
 
         if (produto != null)
         {
-            _empresa.Produtos.Remove(produto);
+            _empresa.RemoverProduto(produto);
             return true;
         }
 
@@ -66,7 +74,7 @@ public class ProdutoService
 
     public bool AtualizarPrecoProduto(string nome, double novoPreco)
     {
-        var produto = BuscarProdutoPorNome(nome);
+        var produto = BuscarProduto(nome);
 
         if (produto != null)
         {
